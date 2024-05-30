@@ -14,15 +14,28 @@
 .a {
   display: flex;
 
+
 }
 .b {
   height: 300px;
-
+  display: block;
   width: 50%;
   text-align: center;
   align-items: center;
 
 }
+.bb {
+width:200px;
+margin:auto;
+border: 1px solid red;
+}
+
+
+
+
+
+
+
 .c {
   width: 50%;
 
@@ -62,20 +75,21 @@ button {
     height: 100%;
 
   }
-  .a {
+  .abc {
     display: inline;
     width: 100%;
-  
+    border: solid red;
   } 
   .b {
     width: 200px;
     height: 200px;
-    margin: auto;
+    margin:0 auto;
   }
   .c {
     width: 100%;
     margin-top: 80px;
     margin-bottom: 100px;
+    margin:0 auto;
   }
 
   

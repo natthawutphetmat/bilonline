@@ -148,11 +148,16 @@ export default function Iduser() {
                 </tr>
               </tbody>
             </table>
-            <div id='a' className="d-flex justify-content-around">
+            <div id='a' className="a">
+
               <div className="b">
+              <div className="bb">
+
                 <img src="/img/p.png" width={200} alt="" /> 
                 <QRCode value={payload} size={200}/>
               </div>
+              </div>
+              
               <div className="c">
                 <div className="text-center">
                   <Image src="/img/b.jpg" width={80} height={80} className='mt-3' />
@@ -165,7 +170,8 @@ export default function Iduser() {
               </div>
             </div>
           </main>
-          <button onClick={downloadImage} className="btn btn-primary mt-3">Download Image</button>
+          <br/><br/>
+          <button onClick={downloadImage} className="btn btn-primary mt-5">Download Image</button>
         </div>
       </>
     );
