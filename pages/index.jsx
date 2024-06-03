@@ -103,7 +103,9 @@ console.log(data)
         <Head>
           <title>Bil:แจ้งรายละเอียดค่าบริ โฆษณา</title>
           <meta name="description" content="Bil:แจ้งรายละเอียดค่าบริโฆษณา และ รายละเอียดต่าง" />
-          <meta property="og:image" content="https://mybil.adsdep.com/favicon.ico"></meta>
+          <meta property="og:image" content="https://mybil.adsdep.com/favicon.ico"/>  
+             <meta name="twitter:image" content="/img/logo.png"/>
+    <meta property="og:image" content="/img/logo.png"/>  
         </Head>
         
         
