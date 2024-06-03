@@ -7,7 +7,8 @@ function index() {
        <Head>
         <title>Bil:แจ้งรายละเอียดค่าบริการ</title>
         <meta name="description" content="Bil:แจ้งรายละเอียดค่าบริการโฆษณา และ รายละเอียดต่าง" />
-        
+           <meta name="twitter:image" content="/img/logo.png"/>
+    <meta property="og:image" content="/img/logo.png"/>  
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://mybil.adsdep.com/" />
         <meta property="og:title" content="Bil:แจ้งรายละเอียดค่าบริการ" />
