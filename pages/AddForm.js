@@ -26,7 +26,7 @@ export default function AddData() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('https://api.adsdep.com/add', {
+      const response = await fetch('https://apibil.adsdeps.com/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
