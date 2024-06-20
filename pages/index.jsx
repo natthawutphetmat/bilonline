@@ -34,7 +34,7 @@ export default function Page() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(`https://api.adsdep.com/bil`);
+        const res = await fetch(`https://apibil.adsdeps.com/get`);
         if (!res.ok) {
           throw new Error('Network response was not ok');
         }
@@ -73,7 +73,7 @@ export default function Page() {
 
 
   const handleDelete = (namebil) => {
-    fetch(`https://api.adsdep.com/delete/${namebil}`, {
+    fetch(`https://apibil.adsdeps.com/delete/${namebil}`, {
       method: 'DELETE',
     })
       .then(response => {
@@ -103,7 +103,7 @@ console.log(data)
         <Head>
           <title>Bil:แจ้งรายละเอียดค่าบริ โฆษณา</title>
           <meta name="description" content="Bil:แจ้งรายละเอียดค่าบริโฆษณา และ รายละเอียดต่าง" />
-          <meta property="og:image" content="https://mybil.adsdep.com/favicon.ico"/>  
+          <meta property="og:image" content="https://apibil.adsdeps.com/favicon.ico"/>  
              <meta name="twitter:image" content="/img/logo.png"/>
     <meta property="og:image" content="/img/logo.png"/>  
         </Head>
