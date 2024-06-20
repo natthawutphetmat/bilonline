@@ -19,7 +19,7 @@ export default function Iduser() {
 
   useEffect(() => {
     if (id) { 
-      fetch(`https://api.adsdep.com/bil/${id}`) 
+      fetch(`https://apibil.adsdeps.com/${id}`) 
         .then(response => response.json())
         .then(data => setData(data))
         .catch(error => console.error('Failed to load data:', error));
