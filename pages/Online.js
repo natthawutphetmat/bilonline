@@ -1,45 +1,41 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
-export default function Home() {
-    const [onlineUsers, setOnlineUsers] = useState([]);
+const AdminPage = () => {
+  const [onlineUsers, setOnlineUsers] = useState(0);
+  const [userIPs, setUserIPs] = useState({});
 
-    useEffect(() => {
-        const socket = io('https://online.adsdep.com/');
+  useEffect(() => {
+    const socket = io();
 
-        socket.on('connect', () => {
-            console.log('connected to WebSocket server');
-        });
+    console.log('Socket connected:', socket.id);
 
-        socket.on('update', (users) => {
-            console.log('Online users:', users);
-            setOnlineUsers(users);
-        });
+    socket.emit('joinHome');
+    console.log('joinHome event emitted');
 
-        socket.on('disconnect', () => {
-            console.log('disconnected from WebSocket server');
-        });
+    socket.on('updateUserCount', ({ onlineUsers, userIPs }) => {
+      console.log('updateUserCount event received:', onlineUsers, userIPs);
+      setOnlineUsers(onlineUsers);
+      setUserIPs(userIPs);
+    });
 
-        // ใช้ setInterval เพื่ออัปเดตข้อมูลทุกวินาที
-        const intervalId = setInterval(() => {
-            socket.emit('requestUpdate');
-        }, 1000); // 1000 มิลลิวินาที (1 วินาที)
+    return () => {
+      socket.emit('leaveHome');
+      console.log('leaveHome event emitted');
+      socket.disconnect();
+    };
+  }, []);
 
-        return () => {
-            clearInterval(intervalId);
-            socket.disconnect();
-        };
-    }, []);
+  return (
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <h2>Online: {onlineUsers}</h2>
+      <ul>
+        {Object.keys(userIPs).map((key) => (
+          <li key={key}>IP: {userIPs[key]}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-    return (
-        <div>
-           
-            <h1> online {onlineUsers.length}</h1>
-            <ul>
-                {onlineUsers.map((ip, index) => (
-                    <li key={index}>{ip}</li>
-                ))}
-            </ul>
-        </div>
-    );
-}
+export default AdminPage;
