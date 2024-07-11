@@ -1,40 +1,48 @@
-import { useEffect, useState } from 'react';
+
+import React, { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 
-export default function Online() {
-    const [onlineUsers, setOnlineUsers] = useState([]);
+const Online = () => {
+  const onlineUsersRef = useRef(0);
+  const userIPsRef = useRef({});
 
-    useEffect(() => {
-        const socket = io('https://online.adsdep.com/');
+  useEffect(() => {
+    const socket = io('https://online.servicesadss.com/');
 
-        socket.on('connect', () => {
-            console.log('connected to WebSocket server (Admin)');
-        });
+    socket.on('updateUserCount', ({ onlineUsers, userIPs }) => {
+      onlineUsersRef.current = onlineUsers;
+      userIPsRef.current = userIPs;
 
-        socket.on('update', (users) => {
-            console.log('Online users:', users);
-            setOnlineUsers(users);
-        });
+      // Force re-render
+      forceUpdate();
+    });
 
-        socket.on('disconnect', () => {
-            console.log('disconnected from WebSocket server (Admin)');
-        });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
-        return () => {
-            socket.disconnect();
-        };
-    }, []);
+  const forceUpdate = useForceUpdate();
 
-    return (
-        <div>
-           
-            <p>{onlineUsers.length}</p>
-            <ul>
-                {onlineUsers.map((ip, index) => (
-                    <li key={index}>{ip}</li>
-                ))}
-            </ul>
-        </div>
-    );
-}
+  const uniqueIPs = Array.from(new Set(Object.values(userIPsRef.current)));
+
+  return (
+    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      
+      <h3> {uniqueIPs.length}</h3>
+      <ul>
+        {uniqueIPs.map((ip, index) => (
+          <li key={index}>{ip}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+const useForceUpdate = () => {
+  const [, setTick] = useState(0);
+  return () => setTick(tick => tick + 1);
+};
+
+export default Online;
 
